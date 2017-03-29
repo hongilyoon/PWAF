@@ -1,4 +1,4 @@
-package bazar.labs.pwaf;
+package bazar.labs.pwyf;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package bazar.labs.pwaf;
+package bazar.labs.pwyf;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
