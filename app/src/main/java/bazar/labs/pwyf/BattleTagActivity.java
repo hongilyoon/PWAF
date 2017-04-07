@@ -49,8 +49,11 @@ public class BattleTagActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<PlatformData>> call, Response<List<PlatformData>> response) {
                 Spinner spinner = (Spinner) findViewById(R.id.spPlatform);
-                String[] arrStr = response.body().stream().map(o -> o.getName()).toArray(String[]::new);
-                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrStr);
+                String[] arrPlatform = new String[response.body().size()];
+                for (int i = 0, cnt = response.body().size(); i < cnt; i++) {
+                    arrPlatform[i] = response.body().get(i).getName();
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrPlatform);
                 spinner.setAdapter(adapter);
             }
 
@@ -66,8 +69,11 @@ public class BattleTagActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<RegionData>> call, Response<List<RegionData>> response) {
                 Spinner spinner = (Spinner) findViewById(R.id.spRegion);
-                String[] arrStr = response.body().stream().map(o -> o.getName()).toArray(String[]::new);
-                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrStr);
+                String[] arrRegion = new String[response.body().size()];
+                for (int i = 0, cnt = response.body().size(); i < cnt; i++) {
+                    arrRegion[i] = response.body().get(i).getName();
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrRegion);
                 spinner.setAdapter(adapter);
             }
 
