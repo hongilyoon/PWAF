@@ -1,13 +1,18 @@
 package bazar.labs.pwyf;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.Spinner;
 
 import java.util.List;
 
 import bazar.labs.pwyf.core.model.PlatformData;
+import bazar.labs.pwyf.core.model.RegionData;
 import bazar.labs.pwyf.core.utils.CommonUtils;
 import bazar.labs.pwyf.service.PlatformService;
+import bazar.labs.pwyf.service.RegionService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,6 +25,11 @@ public class BattleTagActivity extends AppCompatActivity {
     private PlatformService platformService = CommonUtils.getRetrofit().create(PlatformService.class);
 
     /**
+     * regionService
+     */
+    private RegionService regionService = CommonUtils.getRetrofit().create(RegionService.class);
+
+    /**
      * onCreate
      * @param savedInstanceState
      */
@@ -28,22 +38,40 @@ public class BattleTagActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_tag);
 
-        // 플랫폼 목록을 조회합니다.
+        // get Data
         this.getPlatformList();
+        this.getRegionList();
     }
 
     private void getPlatformList() {
         this.platformService.getList().enqueue(new Callback<List<PlatformData>>() {
             @Override
             public void onResponse(Call<List<PlatformData>> call, Response<List<PlatformData>> response) {
-                List<PlatformData> list = response.body();
-                list.stream().forEach(o -> {
-                    System.out.println("");
-                });
+                Spinner spinner = (Spinner) findViewById(R.id.spPlatform);
+                ArrayAdapter adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().stream().map(o -> o.getName()).toArray());
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
             }
 
             @Override
             public void onFailure(Call<List<PlatformData>> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    private void getRegionList() {
+        this.regionService.getList().enqueue(new Callback<List<RegionData>>() {
+            @Override
+            public void onResponse(Call<List<RegionData>> call, Response<List<RegionData>> response) {
+                Spinner spinner = (Spinner) findViewById(R.id.spRegion);
+                ArrayAdapter adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().stream().map(o -> o.getName()).toArray());
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<RegionData>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
