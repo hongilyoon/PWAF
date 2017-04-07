@@ -1,6 +1,11 @@
 package bazar.labs.pwyf.service;
 
-import static com.facebook.HttpMethod.GET;
+import java.util.List;
+
+import bazar.labs.pwyf.core.model.RegionData;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 
 /**
  * Created by hiyoon on 2017-04-05.
@@ -8,7 +13,8 @@ import static com.facebook.HttpMethod.GET;
 
 public interface RegionService {
 
-    @GET("users/{user}/repos")
-    Call<List<Repo>> listRepos(@Path("user") String user);
+    @Headers({"Accept: application/json"})
+    @GET("/region")
+    Call<List<RegionData>> getList();
 
 }

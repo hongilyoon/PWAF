@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="bazar.labs.pwyf.MainActivity" />
-        <activity android:name="bazar.labs.pwyf.FacebookActivity"></activity>
+        <activity android:name="bazar.labs.pwyf.BattleTagActivity" />
+        <activity android:name="bazar.labs.pwyf.FacebookActivity"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 

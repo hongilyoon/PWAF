@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PWAF</string>
     <string name="facebook_app_id">1811260655862937</string>
+    <string name="pwyf_base_url">http://ec2-52-79-123-100.ap-northeast-2.compute.amazonaws.com:3000</string>
 </resources>
