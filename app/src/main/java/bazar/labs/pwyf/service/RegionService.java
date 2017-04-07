@@ -14,7 +14,7 @@ import retrofit2.http.Headers;
 public interface RegionService {
 
     @Headers({"Accept: application/json"})
-    @GET("/region")
+    @GET("/region/list")
     Call<List<RegionData>> getList();
 
 }

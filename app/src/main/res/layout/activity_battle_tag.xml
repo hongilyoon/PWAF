@@ -8,24 +8,29 @@
 
     <LinearLayout
         android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
             <Spinner
                 android:id="@+id/spRegion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">지역</Spinner>
+
             <Spinner
                 android:id="@+id/spPlatform"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">플랫폼</Spinner>
+                android:layout_height="wrap_content">플랫폼
+            </Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -33,6 +38,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.62"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Battle" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.17"
+                android:text="#"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.13"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Tag" />
         </LinearLayout>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
