@@ -7,6 +7,7 @@ import android.widget.ListAdapter;
 import android.widget.Spinner;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import bazar.labs.pwyf.core.model.PlatformData;
 import bazar.labs.pwyf.core.model.RegionData;
@@ -48,8 +49,8 @@ public class BattleTagActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<PlatformData>> call, Response<List<PlatformData>> response) {
                 Spinner spinner = (Spinner) findViewById(R.id.spPlatform);
-                ArrayAdapter adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().stream().map(o -> o.getName()).toArray());
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                String[] arrStr = response.body().stream().map(o -> o.getName()).toArray(String[]::new);
+                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrStr);
                 spinner.setAdapter(adapter);
             }
 
@@ -65,8 +66,8 @@ public class BattleTagActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<RegionData>> call, Response<List<RegionData>> response) {
                 Spinner spinner = (Spinner) findViewById(R.id.spRegion);
-                ArrayAdapter adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_spinner_dropdown_item, response.body().stream().map(o -> o.getName()).toArray());
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                String[] arrStr = response.body().stream().map(o -> o.getName()).toArray(String[]::new);
+                ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrStr);
                 spinner.setAdapter(adapter);
             }
 
