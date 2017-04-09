@@ -10,7 +10,6 @@ import retrofit2.http.Headers;
 /**
  * Created by hiyoon on 2017-04-05.
  */
-
 public interface PlatformService {
 
     @Headers({"Accept: application/json"})

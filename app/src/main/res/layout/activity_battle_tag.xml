@@ -39,7 +39,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/battleTag1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.62"
@@ -58,14 +58,22 @@
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/battleTag2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.13"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Tag" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.62"
+            android:text="가입하기" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
