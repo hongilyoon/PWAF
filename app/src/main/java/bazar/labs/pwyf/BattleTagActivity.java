@@ -1,5 +1,6 @@
 package bazar.labs.pwyf;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -18,10 +19,12 @@ import com.facebook.HttpMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.List;
 
 import bazar.labs.pwyf.core.model.PlatformData;
 import bazar.labs.pwyf.core.model.RegionData;
+import bazar.labs.pwyf.core.model.UserData;
 import bazar.labs.pwyf.core.model.common.SignInData;
 import bazar.labs.pwyf.core.utils.CommonUtils;
 import bazar.labs.pwyf.service.PlatformService;
@@ -67,7 +70,7 @@ public class BattleTagActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BattleTagActivity.this.getUserInfo();
+                BattleTagActivity.this.saveUserInfo();
             }
         });
     }
@@ -118,45 +121,81 @@ public class BattleTagActivity extends AppCompatActivity {
         });
     }
 
-    private void getUserInfo() {
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                AccessToken.getCurrentAccessToken().getUserId(),
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        // get Data
-                        EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
-                        EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
-                        Spinner spPlatform = (Spinner) findViewById(R.id.spPlatform);
-                        Spinner spRegion = (Spinner) findViewById(R.id.spPlatform);
-                        String battleTag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
-                                "" :
-                                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
-                        long platformSeq = spPlatform.getSelectedItemId();
-                        long regionSeq = spRegion.getSelectedItemId();
-                        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+    private void saveUserInfo() {
+        // set user data
+        EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
+        EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
+        String tag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
+                "" :
+                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
 
-                        // save userInfo
-                        try {
-                            BattleTagActivity.this.userService.saveUserInfo(response.getJSONObject().getString("name"), accessToken.getUserId(), platformSeq, regionSeq, battleTag).enqueue(new Callback() {
-                                @Override
-                                public void onResponse(Call call, Response response) {
-                                    BattleTagActivity.this.getFriendList();
-                                }
-
-                                @Override
-                                public void onFailure(Call call, Throwable t) {
-                                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+        // save userInfo
+        try {
+            BattleTagActivity.this.userService.saveUserInfo(
+                    "Hi Yoon",
+                    AccessToken.getCurrentAccessToken().getUserId(),
+                    1,
+                    1,
+                    "요미-3910").enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    BattleTagActivity.this.getFriendList();
                 }
-        ).executeAsync();
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+
+
+//        new GraphRequest(
+//                AccessToken.getCurrentAccessToken(),
+//                AccessToken.getCurrentAccessToken().getUserId(),
+//                null,
+//                HttpMethod.GET,
+//                new GraphRequest.Callback() {
+//                    public void onCompleted(GraphResponse response) {
+//                        // set user data
+//                        EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
+//                        EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
+//                        String tag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
+//                                "" :
+//                                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
+//
+//                        // save userInfo
+//                        try {
+//                            BattleTagActivity.this.userService.saveUserInfo(
+//                                    response.getJSONObject().getString("name"),
+//                                    AccessToken.getCurrentAccessToken().getUserId(),
+//                                    ((Spinner) findViewById(R.id.spPlatform)).getSelectedItemId() + 1,
+//                                    ((Spinner) findViewById(R.id.spRegion)).getSelectedItemId() + 1,
+//                                    tag).enqueue(new Callback() {
+//                                @Override
+//                                public void onResponse(Call call, Response response) {
+//                                    BattleTagActivity.this.getFriendList();
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call call, Throwable t) {
+//                                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }});
     }
 
     private void getFriendList() {
@@ -172,4 +211,30 @@ public class BattleTagActivity extends AppCompatActivity {
                 }
         ).executeAsync();
     }
+
+//    private class SaveUserInfoAsyncTask extends AsyncTask<UserData, Void, Void>{
+//
+//        @Override
+//        protected Void doInBackground(UserData... params) {
+//            Call<List<RegionData>> call = regionService.getList();
+//            try {
+//                List<RegionData> result = call.execute().body();
+//                System.out.println(result.size());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//        }
+//
+//        @Override
+//        protected void onCancelled(Void aVoid) {
+//            super.onCancelled(aVoid);
+//        }
+//    }
 }
