@@ -1,6 +1,5 @@
 package bazar.labs.pwyf;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -16,16 +15,10 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.List;
 
 import bazar.labs.pwyf.core.model.PlatformData;
 import bazar.labs.pwyf.core.model.RegionData;
-import bazar.labs.pwyf.core.model.UserData;
-import bazar.labs.pwyf.core.model.common.SignInData;
 import bazar.labs.pwyf.core.utils.CommonUtils;
 import bazar.labs.pwyf.service.PlatformService;
 import bazar.labs.pwyf.service.RegionService;
