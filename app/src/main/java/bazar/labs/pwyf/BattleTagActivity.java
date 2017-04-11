@@ -1,5 +1,6 @@
 package bazar.labs.pwyf;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -61,7 +62,7 @@ public class BattleTagActivity extends AppCompatActivity {
         this.getRegionList();
 
         // set Event
-        Button btnSave = (Button) findViewById(R.id.btnSave);
+        Button btnSave = (Button) findViewById(R.id.btnOk);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +172,9 @@ public class BattleTagActivity extends AppCompatActivity {
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
                         System.out.println(response);
+                        Intent intent = new Intent(getApplicationContext(), FriendsActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
         ).executeAsync();

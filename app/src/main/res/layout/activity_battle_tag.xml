@@ -44,12 +44,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.62"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Battle" />
+                android:hint="배틀태그입력"
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -63,17 +63,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.13"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Tag" />
+                android:hint="숫자"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.62"
-            android:text="가입하기" />
+            android:text="OK" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
