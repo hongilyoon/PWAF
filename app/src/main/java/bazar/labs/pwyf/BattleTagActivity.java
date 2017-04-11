@@ -176,11 +176,17 @@ public class BattleTagActivity extends AppCompatActivity {
                     public void onCompleted(GraphResponse response) {
                         // save userInfo
                         try {
+                            // set user data
+                            EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
+                            EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
+                            String tag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
+                                "" :
+                                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
                             BattleTagActivity.this.userService.saveUserInfo(
                                     response.getJSONObject().getString("name"),
                                     AccessToken.getCurrentAccessToken().getUserId(),
-                                    1,
-                                    1,
+                                    ((Spinner) findViewById(R.id.spPlatform)).getSelectedItemId() + 1,
+                                    ((Spinner) findViewById(R.id.spRegion)).getSelectedItemId() + 1,
                                     "요미-3910").enqueue(new Callback() {
                                 @Override
                                 public void onResponse(Call call, Response response) {
