@@ -116,57 +116,11 @@ public class BattleTagActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 사용자 정보를 저장합니다.
+     */
     private void saveUserInfo() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        // set user data
-//        EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
-//        EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
-//        String tag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
-//                "" :
-//                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
-//
-//        // save userInfo
-//        try {
-//            BattleTagActivity.this.userService.saveUserInfo(
-//                    "Hi Yoon",
-//                    AccessToken.getCurrentAccessToken().getUserId(),
-//                    1,
-//                    1,
-//                    "요미-3910").enqueue(new Callback<Void>() {
-//                @Override
-//                public void onResponse(Call<Void> call, Response<Void> response) {
-//                    BattleTagActivity.this.getFriendList();
-//                }
-//
-//                @Override
-//                public void onFailure(Call call, Throwable t) {
-//                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-        GraphRequest graphRequest = new GraphRequest(
+        new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 AccessToken.getCurrentAccessToken().getUserId(),
                 null,
@@ -187,7 +141,7 @@ public class BattleTagActivity extends AppCompatActivity {
                                     AccessToken.getCurrentAccessToken().getUserId(),
                                     ((Spinner) findViewById(R.id.spPlatform)).getSelectedItemId() + 1,
                                     ((Spinner) findViewById(R.id.spRegion)).getSelectedItemId() + 1,
-                                    "요미-3910").enqueue(new Callback() {
+                                    tag).enqueue(new Callback() {
                                 @Override
                                 public void onResponse(Call call, Response response) {
                                     BattleTagActivity.this.getFriendList();
@@ -202,54 +156,12 @@ public class BattleTagActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                });
-        graphRequest.executeAsync();
-
-
-
-
-
-
-        /*
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                AccessToken.getCurrentAccessToken().getUserId(),
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-//                        // set user data
-//                        EditText battleTag1 = (EditText) findViewById(R.id.battleTag1);
-//                        EditText battleTag2 = (EditText) findViewById(R.id.battleTag2);
-//                        String tag = TextUtils.isEmpty(battleTag1.getText()) || TextUtils.isEmpty(battleTag2.getText()) ?
-//                                "" :
-//                                String.format("%s-%s", battleTag1.getText(), battleTag2.getText());
-
-                        // save userInfo
-                        try {
-                            BattleTagActivity.this.userService.saveUserInfo(
-                                    response.getJSONObject().getString("name"),
-                                    AccessToken.getCurrentAccessToken().getUserId(),
-                                    1,
-                                    1,
-                                    "요미-3910").enqueue(new Callback() {
-                                @Override
-                                public void onResponse(Call call, Response response) {
-                                    BattleTagActivity.this.getFriendList();
-                                }
-
-                                @Override
-                                public void onFailure(Call call, Throwable t) {
-                                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }});
-                    */
+                }).executeAsync();
     }
 
+    /**
+     * 친구 목록을 저장합니다.
+     */
     private void getFriendList() {
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -263,30 +175,4 @@ public class BattleTagActivity extends AppCompatActivity {
                 }
         ).executeAsync();
     }
-
-//    private class SaveUserInfoAsyncTask extends AsyncTask<UserData, Void, Void>{
-//
-//        @Override
-//        protected Void doInBackground(UserData... params) {
-//            Call<List<RegionData>> call = regionService.getList();
-//            try {
-//                List<RegionData> result = call.execute().body();
-//                System.out.println(result.size());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//        }
-//
-//        @Override
-//        protected void onCancelled(Void aVoid) {
-//            super.onCancelled(aVoid);
-//        }
-//    }
 }
