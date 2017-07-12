@@ -30,6 +30,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * BattleTagActivity
+ */
 public class BattleTagActivity extends AppCompatActivity {
 
     /**
@@ -83,6 +86,7 @@ public class BattleTagActivity extends AppCompatActivity {
                 for (int i = 0, cnt = response.body().size(); i < cnt; i++) {
                     arrPlatform[i] = response.body().get(i).getName();
                 }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrPlatform);
                 spinner.setAdapter(adapter);
             }
@@ -106,6 +110,7 @@ public class BattleTagActivity extends AppCompatActivity {
                 for (int i = 0, cnt = response.body().size(); i < cnt; i++) {
                     arrRegion[i] = response.body().get(i).getName();
                 }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter(BattleTagActivity.this, android.R.layout.simple_dropdown_item_1line, arrRegion);
                 spinner.setAdapter(adapter);
             }

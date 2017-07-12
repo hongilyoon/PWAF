@@ -15,10 +15,9 @@ public class SplashActivity extends AppCompatActivity {
         Thread splashThread = new Thread(){
             @Override
             public void run() {
-
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), FacebookActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BattleTagActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {
