@@ -53,7 +53,7 @@ public class BattleTagActivity extends AppCompatActivity {
     /**
      * onCreate
      *
-     * @param savedInstanceState
+     * @param savedInstanceState 
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
